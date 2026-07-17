@@ -58,7 +58,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,500&family=Playfair+Display:wght@500;600;700&family=Public+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -83,19 +83,33 @@
     .navbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all .4s ease}
     .navbar.scrolled{background:rgba(245,240,232,.96);backdrop-filter:blur(12px);padding:12px 0;box-shadow:var(--shadow)}
     .nav-inner{display:flex;align-items:center;justify-content:space-between}
-    .nav-logo img{height:72px;width:auto;object-fit:contain;transition:height .3s ease;mix-blend-mode:multiply}
-    .navbar.scrolled .nav-logo img{height:52px}
-    .nav-links{display:flex;gap:36px;list-style:none}
-    .nav-links a{font-size:.88rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text);transition:color .2s}
-    .nav-links a:hover{color:var(--gold)}
-    .nav-cta{background:var(--green) !important;color:var(--cream) !important;padding:10px 22px;border-radius:4px}
+    .nav-logo{display:flex;align-items:center;gap:14px}
+    .nav-logo img{height:56px;width:auto;object-fit:contain;filter:brightness(0) invert(1);transition:height .3s ease,filter .3s ease}
+    .navbar.scrolled .nav-logo img{height:42px;filter:none}
+    .nav-logo-text{display:flex;flex-direction:column;justify-content:center;line-height:1.15;height:56px;transition:height .3s ease}
+    .navbar.scrolled .nav-logo-text{height:42px}
+    .nav-logo-text .nl-main{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--cream);letter-spacing:.03em;white-space:nowrap;transition:color .3s ease}
+    .nav-logo-text .nl-sub{font-family:'Playfair Display',serif;font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light);margin-top:3px;white-space:nowrap;transition:color .3s ease}
+    .navbar.scrolled .nav-logo-text .nl-main{color:var(--green-dark)}
+    .navbar.scrolled .nav-logo-text .nl-sub{color:var(--gold)}
+    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+    .nav-links li{display:flex;align-items:center}
+    .nav-links a{font-size:.88rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--cream);white-space:nowrap;transition:color .2s}
+    .nav-links a:hover{color:var(--gold-light)}
+    .navbar.scrolled .nav-links a{color:var(--text)}
+    .navbar.scrolled .nav-links a:hover{color:var(--gold)}
+    .nav-links a.nav-cta,.nav-links a.nav-cta:hover{color:var(--cream) !important}
+    .nav-cta{background:var(--green) !important;color:var(--cream) !important;padding:10px 20px;border-radius:4px;white-space:nowrap}
     .nav-cta:hover{background:var(--gold) !important}
     .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-    .hamburger span{display:block;width:24px;height:2px;background:var(--green);transition:all .3s}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--cream);transition:all .3s}
+    .navbar.scrolled .hamburger span{background:var(--green)}
     .mobile-nav{display:none;position:fixed;inset:0;background:var(--cream);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px}
     .mobile-nav.open{display:flex}
     .mobile-nav a{font-family:'Newsreader',serif;font-size:2rem;color:var(--green-dark);transition:color .2s}
     .mobile-nav a:hover{color:var(--gold)}
+    .mobile-nav a.btn-primary{font-family:'Public Sans',sans-serif;font-size:.95rem;color:var(--cream)}
+    .mobile-nav a.btn-primary:hover{color:var(--cream)}
     .mob-close{position:absolute;top:24px;right:24px;background:none;border:none;font-size:2rem;cursor:pointer;color:var(--green)}
 
     /* ===== HERO ===== */
@@ -139,7 +153,7 @@
 
     /* ===== AMBIENTES ===== */
     .ambientes{padding:100px 0;background:var(--cream)}
-    .amb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+    .amb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
     .amb-card{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;aspect-ratio:4/3}
     .amb-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
     .amb-card:hover img{transform:scale(1.05)}
@@ -149,6 +163,11 @@
 
     /* ===== PORTFOLIO ===== */
     .portfolio{padding:100px 0;background:var(--white)}
+    .port-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px}
+    .port-filter{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.82rem;font-weight:500;padding:9px 20px;border-radius:100px;cursor:pointer;transition:all .25s;letter-spacing:.02em;font-family:'Public Sans',sans-serif}
+    .port-filter:hover{border-color:var(--gold);color:var(--gold)}
+    .port-filter.active{background:var(--green);border-color:var(--green);color:var(--cream)}
+    .port-item.hidden{display:none}
     .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     .port-item{position:relative;border-radius:8px;overflow:hidden;cursor:pointer}
     .port-item:first-child{grid-column:span 2;grid-row:span 2}
@@ -205,7 +224,10 @@
     /* ===== FOOTER ===== */
     .footer{background:var(--green-dark);padding:64px 0 32px;color:rgba(245,240,232,.65)}
     .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid rgba(245,240,232,.1)}
-    .footer-brand img{height:46px;margin-bottom:16px;filter:brightness(0) invert(1);opacity:.85}
+    .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .footer-logo img{height:38px;filter:brightness(0) invert(1);opacity:.9}
+    .footer-logo-text{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--cream);letter-spacing:.02em}
+    .footer-logo-text strong{font-weight:700}
     .footer-brand p{font-size:.88rem;line-height:1.75;max-width:270px}
     .foot-col h4{color:var(--cream);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
     .foot-col ul{list-style:none}
@@ -218,6 +240,24 @@
     .wa-float{position:fixed;bottom:30px;right:30px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:99;transition:all .3s}
     .wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.5)}
     .wa-float svg{width:30px;height:30px;fill:white}
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(20,24,16,.95);z-index:300;align-items:center;justify-content:center}
+    .lightbox.open{display:flex}
+    .lb-img{max-width:88vw;max-height:85vh;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .lb-close{position:absolute;top:24px;right:28px;background:none;border:none;color:var(--cream);font-size:1.8rem;line-height:1;cursor:pointer;padding:8px;transition:color .2s}
+    .lb-close:hover{color:var(--gold-light)}
+    .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(245,240,232,.1);border:1px solid rgba(245,240,232,.3);color:var(--cream);font-size:2.2rem;width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:0}
+    .lb-nav:hover{background:rgba(245,240,232,.2);border-color:var(--gold-light);color:var(--gold-light)}
+    .lb-prev{left:20px}
+    .lb-next{right:20px}
+    .lb-counter{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:rgba(245,240,232,.7);font-size:.83rem;letter-spacing:.05em}
+    @media(max-width:768px){
+      .lb-nav{width:42px;height:42px;font-size:1.7rem}
+      .lb-prev{left:8px}
+      .lb-next{right:8px}
+      .lb-close{top:14px;right:16px;font-size:1.5rem}
+    }
 
     /* ===== MICRO-INTERAÇÕES (item 06) ===== */
     .btn-primary,.btn-secondary{will-change:transform}
@@ -264,17 +304,21 @@
       .hero-img{display:none}
       .hero-content{max-width:100%}
       .dif-grid{grid-template-columns:repeat(2,1fr)}
+      .amb-grid{grid-template-columns:repeat(2,1fr)}
       .steps{grid-template-columns:repeat(2,1fr)}
       .steps::before{display:none}
       .footer-top{grid-template-columns:1fr 1fr}
     }
-    @media(max-width:768px){
-      /* Nav */
+    @media(max-width:900px){
+      /* Nav — evita sobreposição do logo com os links em telas médias */
       .nav-links{display:none}
       .hamburger{display:flex}
-      .nav-logo img{height:44px}
+      .nav-logo img{height:38px}
+      .nav-logo-text .nl-main{font-size:1.05rem}
+      .nav-logo-text .nl-sub{font-size:.52rem}
       .navbar{padding:14px 0}
-
+    }
+    @media(max-width:768px){
       /* Hero — tudo visível sem scroll */
       .hero{min-height:100svh;background-position:65% center;align-items:center;justify-content:center}
       .hero-content{padding-top:88px;padding-bottom:24px;text-align:center;display:flex;flex-direction:column;align-items:center}
@@ -309,6 +353,8 @@
       .amb-label h3{font-size:1.25rem}
 
       /* Portfolio — grade 2x2 no mobile */
+      .port-filters{gap:8px;margin-bottom:28px}
+      .port-filter{padding:7px 14px;font-size:.76rem}
       .port-grid{grid-template-columns:1fr 1fr;gap:8px}
       .port-item:first-child{grid-column:span 2;aspect-ratio:16/9}
       .port-item{border-radius:6px}
@@ -348,7 +394,7 @@
       .footer{padding:44px 0 20px}
       .footer-top{grid-template-columns:1fr;gap:20px;margin-bottom:28px;padding-bottom:28px}
       .footer-brand{text-align:center}
-      .footer-brand img{margin:0 auto 12px}
+      .footer-logo{justify-content:center}
       .footer-brand p{max-width:100%}
       .foot-col{text-align:center}
       .footer-bottom{flex-direction:column;gap:8px;text-align:center;font-size:.78rem}
@@ -373,7 +419,11 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <img src="logo arboreto/WhatsApp Image 2026-05-23 at 18.09.44.jpeg" alt="Arboreto Marcenaria">
+        <img src="logo arboreto/arboreto-icone.png" alt="Arboreto Marcenaria">
+        <span class="nav-logo-text">
+          <span class="nl-main">Arboreto Marcenaria</span>
+          <span class="nl-sub">Móveis Planejados</span>
+        </span>
       </a>
       <ul class="nav-links">
         <li><a href="#ambientes">Ambientes</a></li>
@@ -439,7 +489,7 @@
 <section class="diferenciais" id="diferenciais">
   <div class="container">
     <div class="sec-hdr fade-up">
-      <span class="sec-tag">Por que a Arboreto</span>
+      <span class="sec-tag">Por que a Arboreto?</span>
       <h2>Sob Medida que Fala<br>por Si Mesma</h2>
       <p>Do primeiro contato à entrega final, cada detalhe é pensado para superar as suas expectativas.</p>
     </div>
@@ -457,14 +507,14 @@
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/></svg>
         </div>
         <h3>Materiais Nobres</h3>
-        <p>MDF de alta densidade, acabamentos premium e ferragens importadas. Qualidade que você vê, toca e sente todos os dias.</p>
+        <p>MDF, acabamento e ferragens de alto padrão. Qualidade que você vê, toca e sente todos os dias.</p>
         <span class="dif-line"></span>
       </div>
       <div class="dif-card fade-up">
         <div class="dif-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
         </div>
-        <h3>Entrega Impecável</h3>
+        <h3>Entrega no Prazo</h3>
         <p>Do projeto à instalação, criamos ambientes sob medida para o seu jeito de viver e trabalhar.</p>
         <span class="dif-line"></span>
       </div>
@@ -481,7 +531,7 @@
       <p>De pergolados e painéis de MDF a closets e dormitórios — planejamos cada canto com o mesmo cuidado e precisão.</p>
     </div>
     <div class="amb-grid">
-      <div class="amb-card fade-up">
+      <div class="amb-card fade-up" data-category="cozinhas">
         <img src="projetos/IMG-20240321-WA0108.jpg" alt="Cozinhas Planejadas" loading="lazy" decoding="async">
         <div class="amb-overlay">
           <div class="amb-label">
@@ -490,7 +540,7 @@
           </div>
         </div>
       </div>
-      <div class="amb-card fade-up">
+      <div class="amb-card fade-up" data-category="dormitorios">
         <img src="projetos/IMG-20260515-WA0459.jpg" alt="Dormitórios Planejados" loading="lazy" decoding="async">
         <div class="amb-overlay">
           <div class="amb-label">
@@ -499,7 +549,7 @@
           </div>
         </div>
       </div>
-      <div class="amb-card fade-up">
+      <div class="amb-card fade-up" data-category="corporativo">
         <img src="projetos/IMG-20250913-WA0235.jpg" alt="Projetos Corporativos" loading="lazy" decoding="async">
         <div class="amb-overlay">
           <div class="amb-label">
@@ -508,12 +558,30 @@
           </div>
         </div>
       </div>
-      <div class="amb-card fade-up">
-        <img src="projetos/IMG-20251010-WA0098.jpg" alt="Lounges & Home Office" loading="lazy" decoding="async">
+      <div class="amb-card fade-up" data-category="convivencia">
+        <img src="projetos/IMG-20251010-WA0098.jpg" alt="Espaço de Convivência" loading="lazy" decoding="async">
         <div class="amb-overlay">
           <div class="amb-label">
             <span>Especialidade</span>
-            <h3>Lounges & Home Office</h3>
+            <h3>Espaço de Convivência</h3>
+          </div>
+        </div>
+      </div>
+      <div class="amb-card fade-up" data-category="banheiros">
+        <img src="projetos/banheiro.jpg" alt="Banheiros Planejados" loading="lazy" decoding="async">
+        <div class="amb-overlay">
+          <div class="amb-label">
+            <span>Especialidade</span>
+            <h3>Banheiros Planejados</h3>
+          </div>
+        </div>
+      </div>
+      <div class="amb-card fade-up" data-category="externas">
+        <img src="projetos/20260319_141034.jpg" alt="Áreas Externas" loading="lazy" decoding="async">
+        <div class="amb-overlay">
+          <div class="amb-label">
+            <span>Especialidade</span>
+            <h3>Áreas Externas</h3>
           </div>
         </div>
       </div>
@@ -529,41 +597,130 @@
       <h2>Projetos que<br>Inspiram</h2>
       <p>Cada obra conta uma história. Conheça alguns dos ambientes que transformamos no Rio de Janeiro.</p>
     </div>
+    <div class="port-filters fade-up">
+      <button class="port-filter active" data-filter="all">Todos</button>
+      <button class="port-filter" data-filter="cozinhas">Cozinhas</button>
+      <button class="port-filter" data-filter="dormitorios">Dormitórios</button>
+      <button class="port-filter" data-filter="convivencia">Salas &amp; Convivência</button>
+      <button class="port-filter" data-filter="corporativo">Corporativo</button>
+      <button class="port-filter" data-filter="banheiros">Banheiros</button>
+      <button class="port-filter" data-filter="externas">Áreas Externas</button>
+    </div>
     <div class="port-grid">
-      <div class="port-item fade-up">
+      <div class="port-item fade-up" data-category="convivencia">
         <img src="projetos/20260319_141103.jpg" alt="Sala com painéis de MDF e iluminação âmbar" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up">
+      <div class="port-item fade-up" data-category="cozinhas">
         <img src="projetos/IMG-20240321-WA0108.jpg" alt="Cozinha verde planejada" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up">
-        <img src="projetos/IMG-20260515-WA0489.jpg" alt="Dormitório infantil planejado" loading="lazy" decoding="async">
+      <div class="port-item fade-up" data-category="dormitorios">
+        <img src="projetos/IMG-20220720-WA0062.jpg" alt="Quarto infantil com papel de parede floral e daybed" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up">
+      <div class="port-item fade-up" data-category="corporativo">
         <img src="projetos/IMG-20250913-WA0235.jpg" alt="Sala de reunião corporativa" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up">
-        <img src="projetos/IMG-20241025-WA0246.jpg" alt="Banheiro com forro de MDF" loading="lazy" decoding="async">
-        <div class="port-overlay"><span>Ver projeto</span></div>
-      </div>
-      <div class="port-item fade-up">
+      <div class="port-item fade-up" data-category="cozinhas">
         <img src="projetos/IMG-20241209-WA0444.jpg" alt="Cozinha branca planejada" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up">
+      <div class="port-item fade-up" data-category="externas">
         <img src="projetos/20260319_141034.jpg" alt="Pergolado e área de lazer" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up">
+      <div class="port-item fade-up" data-category="dormitorios">
         <img src="projetos/IMG-20260515-WA0459.jpg" alt="Dormitório infantil rosa" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up">
+      <div class="port-item fade-up" data-category="corporativo">
         <img src="projetos/IMG-20250917-WA0390.jpg" alt="Sala de reunião" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="cozinhas">
+        <img src="projetos/cozinha-bar-pendente.jpg" alt="Cozinha com bar e pendentes" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="cozinhas">
+        <img src="projetos/cozinha-branca-pia.jpg" alt="Cozinha branca com pia em granito" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="cozinhas">
+        <img src="projetos/cozinha-branca-completa.jpg" alt="Cozinha branca planejada completa" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="banheiros">
+        <img src="projetos/banheiro.jpg" alt="Banheiro planejado com bancada dupla em granito" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="banheiros">
+        <img src="projetos/banheiro-espelheira.jpg" alt="Banheiro com espelheira iluminada" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="cozinhas">
+        <img src="projetos/20260319_140855.jpg" alt="Cozinha integrada com pé-direito duplo" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="cozinhas">
+        <img src="projetos/20260319_141306.jpg" alt="Cozinha com bancada em mármore verde" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="cozinhas">
+        <img src="projetos/IMG-20240321-WA0109.jpg" alt="Cozinha planejada em tons verde-oliva com ilha" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="dormitorios">
+        <img src="projetos/IMG-20220720-WA0065.jpg" alt="Quarto de bebê em tons rosa com berço e TV" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="dormitorios">
+        <img src="projetos/IMG-20220720-WA0066.jpg" alt="Detalhe de nichos em quarto infantil" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="dormitorios">
+        <img src="projetos/IMG-20221114-WA0194.jpg" alt="Quarto planejado com cabeceira ripada e criado-mudo suspenso" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="dormitorios">
+        <img src="projetos/IMG-20260515-WA0487.jpg" alt="Detalhe de prateleiras em quarto infantil rosa" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="dormitorios">
+        <img src="projetos/IMG-20260515-WA0488.jpg" alt="Quarto infantil rosa com daybed e cortinas" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="dormitorios">
+        <img src="projetos/IMG_20220806_164010_344.jpg" alt="Quarto infantil planejado com nichos e painel de TV" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="corporativo">
+        <img src="projetos/IMG-20250913-WA0237.jpg" alt="Sala de reunião corporativa L'Oréal Brasil" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="corporativo">
+        <img src="projetos/IMG-20260122-WA0198.jpg" alt="Sala de reunião corporativa com mesa oval" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="corporativo">
+        <img src="projetos/escritorio-penha.jpg" alt="Escritório planejado em madeira" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="corporativo">
+        <img src="projetos/copa-corporativa.jpg" alt="Copa corporativa planejada" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="convivencia">
+        <img src="projetos/20260319_140841.jpg" alt="Adega e bar planejados em mármore verde" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="convivencia">
+        <img src="projetos/20260319_141120.jpg" alt="Sala de jantar planejada" loading="lazy" decoding="async">
+        <div class="port-overlay"><span>Ver projeto</span></div>
+      </div>
+      <div class="port-item fade-up" data-category="convivencia">
+        <img src="projetos/copa-bar.jpg" alt="Copa com bar planejado" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
     </div>
@@ -609,42 +766,46 @@
     <div class="sec-hdr fade-up">
       <span class="sec-tag">Depoimentos</span>
       <h2>O Que Nossos<br>Clientes Dizem</h2>
+      <p>Avaliações reais de clientes no Google — nota 5,0 com base em 14 avaliações.</p>
     </div>
     <div class="dep-grid">
       <div class="dep-card fade-up">
         <div class="stars">★★★★★</div>
-        <p>"A Arboreto transformou completamente minha cozinha. O projeto ficou exatamente como combinado na entrega. Profissionalismo do início ao fim."</p>
+        <p>"Excelente serviço, material de muita qualidade e pontualidade na entrega. Superou muito minhas expectativas na entrega e instalação dos meus armários dos banheiros."</p>
+        <div class="dep-autor">
+          <div class="dep-avatar">D</div>
+          <div>
+            <div class="dep-name">Danielle Miranda</div>
+            <div class="dep-local">Avaliação no Google · 2 meses atrás</div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p>"Já conhecia o trabalho do Sr. Francisco. Trabalho sempre perfeito, tudo feito com muito capricho. Estamos mais uma vez muito satisfeitas com os trabalhos realizados. Obrigada!"</p>
         <div class="dep-autor">
           <div class="dep-avatar">A</div>
           <div>
-            <div class="dep-name">Ana Paula Ribeiro</div>
-            <div class="dep-local">Barra da Tijuca, RJ</div>
+            <div class="dep-name">Angela Urquiza</div>
+            <div class="dep-local">Avaliação no Google · 1 mês atrás</div>
           </div>
         </div>
       </div>
       <div class="dep-card fade-up">
         <div class="stars">★★★★★</div>
-        <p>"Fizemos o dormitório completo com closet integrado. A qualidade do acabamento é impressionante. Vale cada centavo investido."</p>
+        <p>"Trabalho impecável, fiquei muito satisfeita. Profissionalismo e responsabilidade. Gosto muito do trabalho de vocês, super indico!"</p>
         <div class="dep-autor">
-          <div class="dep-avatar">R</div>
+          <div class="dep-avatar">S</div>
           <div>
-            <div class="dep-name">Ricardo Mendonça</div>
-            <div class="dep-local">Leblon, RJ</div>
-          </div>
-        </div>
-      </div>
-      <div class="dep-card fade-up">
-        <div class="stars">★★★★★</div>
-        <p>"Contratamos para o escritório inteiro. Entrega no prazo, equipe super educada e o resultado ficou ainda melhor do que esperávamos."</p>
-        <div class="dep-autor">
-          <div class="dep-avatar">C</div>
-          <div>
-            <div class="dep-name">Carla Fonseca</div>
-            <div class="dep-local">Ipanema, RJ</div>
+            <div class="dep-name">Simone Cardoso</div>
+            <div class="dep-local">Local Guide · Google</div>
           </div>
         </div>
       </div>
     </div>
+    <p style="text-align:center;margin-top:36px">
+      <a href="https://www.google.com/maps/place/Arboreto+Marcenaria+%7C+M%C3%B3veis+Planejados+RJ/@-22.978721,-43.3426983,17z/data=!3m1!4b1!4m6!3m5!1s0x6dbe6931a7303e75:0xa846d16dc180fefc!8m2!3d-22.978721!4d-43.3426983!16s%2Fg%2F11vz5pjjbg" target="_blank" style="color:var(--gold);font-weight:600;font-size:.9rem;border-bottom:1px solid var(--gold);padding-bottom:2px">Ver todas as avaliações no Google →</a>
+    </p>
   </div>
 </section>
 
@@ -714,7 +875,10 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="logo arboreto/WhatsApp Image 2026-05-23 at 18.09.44.jpeg" alt="Arboreto Marcenaria">
+        <div class="footer-logo">
+          <img src="logo arboreto/arboreto-icone.png" alt="Arboreto Marcenaria">
+          <span class="footer-logo-text"><strong>Arboreto</strong> Marcenaria</span>
+        </div>
         <p>Móveis planejados de alto padrão para quem valoriza exclusividade, qualidade e o cuidado de cada detalhe.</p>
       </div>
       <div class="foot-col">
@@ -756,6 +920,15 @@
 <a href="https://wa.me/5521984102603?text=Ol%C3%A1%20boa%20tarde%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento." class="wa-float" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Fechar">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Foto anterior">‹</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Próxima foto">›</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
 
 <!-- GSAP + ScrollTrigger -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -831,6 +1004,104 @@
     const text = `Olá! Me chamo *${nome}* e gostaria de um orçamento.\n\n*Ambiente:* ${amb}\n*Telefone:* ${tel}${msg ? '\n\n' + msg : ''}`;
     window.open(`https://wa.me/5521984102603?text=${encodeURIComponent(text)}`, '_blank');
   }
+
+  /* ====== LIGHTBOX — Portfólio e Ambientes ====== */
+  (function () {
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCounter = document.getElementById('lbCounter');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+
+    let gallery = [];
+    let current = 0;
+
+    function render() {
+      const item = gallery[current];
+      lbImg.src = item.src;
+      lbImg.alt = item.alt;
+      lbCounter.textContent = `${current + 1} / ${gallery.length}`;
+    }
+
+    function openLightbox(images, index) {
+      gallery = images;
+      current = index;
+      render();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function next() { current = (current + 1) % gallery.length; render(); }
+    function prev() { current = (current - 1 + gallery.length) % gallery.length; render(); }
+
+    function wireGroup(itemSelector, imgSelector) {
+      const items = Array.from(document.querySelectorAll(itemSelector));
+      const images = items.map(item => {
+        const img = item.matches('img') ? item : item.querySelector(imgSelector);
+        return { src: img.src, alt: img.alt };
+      });
+      items.forEach((item, i) => {
+        item.addEventListener('click', () => openLightbox(images, i));
+      });
+    }
+
+    document.querySelectorAll('.port-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const visible = Array.from(document.querySelectorAll('.port-item:not(.hidden)'));
+        const images = visible.map(el => {
+          const img = el.querySelector('img');
+          return { src: img.src, alt: img.alt };
+        });
+        const index = visible.indexOf(item);
+        if (index > -1) openLightbox(images, index);
+      });
+    });
+    document.querySelectorAll('.amb-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const cat = card.dataset.category;
+        const portImages = Array.from(document.querySelectorAll(`.port-item[data-category="${cat}"] img`))
+          .map(img => ({ src: img.src, alt: img.alt }));
+        const coverImg = card.querySelector('img');
+        const cover = { src: coverImg.src, alt: coverImg.alt };
+        const images = portImages.some(i => i.src === cover.src) ? portImages : [cover, ...portImages];
+        openLightbox(images, 0);
+      });
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', next);
+    lbPrev.addEventListener('click', prev);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+  })();
+
+  /* ====== FILTRO DE PORTFÓLIO POR CÔMODO ====== */
+  (function () {
+    const filterBtns = document.querySelectorAll('.port-filter');
+    const items = document.querySelectorAll('.port-item');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        items.forEach(item => {
+          const match = filter === 'all' || item.dataset.category === filter;
+          item.classList.toggle('hidden', !match);
+        });
+      });
+    });
+  })();
 </script>
 </body>
 </html>
