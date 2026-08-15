@@ -59,7 +59,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,500&family=Playfair+Display:wght@500;600;700&family=Public+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,500&family=Playfair+Display:wght@500;600;700&family=Public+Sans:wght@300;400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -71,6 +71,7 @@
     html{scroll-behavior:smooth}
     body{font-family:'Public Sans',sans-serif;background:var(--cream-light);color:var(--text);line-height:1.6;overflow-x:hidden}
     h1,h2,h3,h4{font-family:'Newsreader',serif;font-weight:600;line-height:1.2}
+    h1,h2{font-family:'Cinzel',serif;font-weight:700;font-variant:small-caps;letter-spacing:.01em}
     img{max-width:100%;display:block}
     a{text-decoration:none;color:inherit}
 
@@ -89,10 +90,10 @@
     .navbar.scrolled .nav-logo img{height:42px;filter:none}
     .nav-logo-text{display:flex;flex-direction:column;justify-content:center;line-height:1.15;height:56px;transition:height .3s ease}
     .navbar.scrolled .nav-logo-text{height:42px}
-    .nav-logo-text .nl-main{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--cream);letter-spacing:.03em;white-space:nowrap;transition:color .3s ease;font-variant:small-caps}
-    .nav-logo-text .nl-sub{font-family:'Playfair Display',serif;font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light);margin-top:3px;white-space:nowrap;transition:color .3s ease}
-    .navbar.scrolled .nav-logo-text .nl-main{color:var(--green-dark)}
-    .navbar.scrolled .nav-logo-text .nl-sub{color:var(--gold)}
+    .nav-logo-text .nl-main{font-family:'Cinzel',serif;font-weight:700;font-size:1.3rem;color:var(--cream);letter-spacing:.03em;white-space:nowrap;transition:color .3s ease;font-variant:small-caps;text-shadow:0 1px 4px rgba(0,0,0,.35)}
+    .nav-logo-text .nl-sub{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#ffdb99;margin-top:3px;white-space:nowrap;transition:color .3s ease;text-shadow:0 1px 3px rgba(0,0,0,.6),0 0 10px rgba(0,0,0,.35)}
+    .navbar.scrolled .nav-logo-text .nl-main{color:var(--green-dark);text-shadow:none}
+    .navbar.scrolled .nav-logo-text .nl-sub{color:#6b4711;text-shadow:none;font-weight:700}
     .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
     .nav-links li{display:flex;align-items:center}
     .nav-links a{font-size:.88rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--cream);white-space:nowrap;transition:color .2s}
@@ -227,7 +228,7 @@
     .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid rgba(245,240,232,.1)}
     .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
     .footer-logo img{height:38px;filter:brightness(0) invert(1);opacity:.9}
-    .footer-logo-text{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--cream);letter-spacing:.02em}
+    .footer-logo-text{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--cream);letter-spacing:.02em}
     .footer-logo-text strong{font-weight:700}
     .footer-brand p{font-size:.88rem;line-height:1.75;max-width:270px}
     .foot-col h4{color:var(--cream);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
@@ -616,16 +617,8 @@
         <img src="projetos/IMG-20240321-WA0108.jpg" alt="Cozinha verde planejada" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
-      <div class="port-item fade-up" data-category="corporativo">
-        <img src="projetos/IMG-20250913-WA0235.jpg" alt="Sala de reunião corporativa" loading="lazy" decoding="async">
-        <div class="port-overlay"><span>Ver projeto</span></div>
-      </div>
       <div class="port-item fade-up" data-category="cozinhas">
         <img src="projetos/IMG-20241209-WA0444.jpg" alt="Cozinha branca planejada" loading="lazy" decoding="async">
-        <div class="port-overlay"><span>Ver projeto</span></div>
-      </div>
-      <div class="port-item fade-up" data-category="externas">
-        <img src="projetos/20260319_141034.jpg" alt="Pergolado e área de lazer" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
       <div class="port-item fade-up" data-category="dormitorios">
@@ -678,10 +671,6 @@
       </div>
       <div class="port-item fade-up" data-category="dormitorios">
         <img src="projetos/IMG-20221114-WA0194.jpg" alt="Quarto planejado com cabeceira ripada e criado-mudo suspenso" loading="lazy" decoding="async">
-        <div class="port-overlay"><span>Ver projeto</span></div>
-      </div>
-      <div class="port-item fade-up" data-category="dormitorios">
-        <img src="projetos/IMG-20260515-WA0487.jpg" alt="Detalhe de prateleiras em quarto infantil rosa" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
       <div class="port-item fade-up" data-category="dormitorios">
@@ -806,14 +795,6 @@
       </div>
       <div class="port-item fade-up" data-category="dormitorios">
         <img src="projetos/quartobeberosa-03.jpg" alt="Berço planejado no quarto de bebê rosa" loading="lazy" decoding="async">
-        <div class="port-overlay"><span>Ver projeto</span></div>
-      </div>
-      <div class="port-item fade-up" data-category="dormitorios">
-        <img src="projetos/quartobeberosa-04.jpg" alt="Quarto de bebê rosa com painel de TV" loading="lazy" decoding="async">
-        <div class="port-overlay"><span>Ver projeto</span></div>
-      </div>
-      <div class="port-item fade-up" data-category="dormitorios">
-        <img src="projetos/quartobeberosa-06.jpg" alt="Closet planejado no quarto de bebê rosa" loading="lazy" decoding="async">
         <div class="port-overlay"><span>Ver projeto</span></div>
       </div>
       <div class="port-item fade-up" data-category="dormitorios">
